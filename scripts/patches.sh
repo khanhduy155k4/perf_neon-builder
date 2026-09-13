@@ -281,6 +281,8 @@ case "$DEVICE_IMPORT" in
             -e 's/^# CONFIG_CC_STACKPROTECTOR_NONE is not set/CONFIG_CC_STACKPROTECTOR_NONE=y/' \
             -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
             $MAIN_DEFCONFIG
+        echo "-- Removing regalloc advisor..."
+        sed -i '/-regalloc-enable-advisor=release/d' Makefile
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
@@ -304,6 +306,8 @@ case "$DEVICE_IMPORT" in
             -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
             -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
             $MAIN_DEFCONFIG
+        echo "-- Removing regalloc advisor..."
+        sed -i '/-regalloc-enable-advisor=release/d' Makefile
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG

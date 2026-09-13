@@ -40,7 +40,7 @@ Standard features:
 
 Select features:   
 - Droidspaces container support
-- Compiled with AOSP Clang 23 Only.
+- Compiled with Neutron Clang.
 
 # Compatibility
 Currently supported Operating System (Weekly release only)   

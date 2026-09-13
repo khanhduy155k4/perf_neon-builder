@@ -235,6 +235,19 @@ ksu_fix_susfs_fouronenine() {
         sed -i 's|^[[:space:]]*mnt = alloc_vfsmnt(fc->source ?: "none");|#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT\n\t// - We will just stop checking for ksu process if /sdcard/Android is accessible,\n\t//   for the sake of performance\n\tif (static_branch_unlikely(\&susfs_is_sdcard_android_data_not_decrypted)) {\n\t\tif (susfs_is_current_ksu_domain()) {\n\t\t\tmnt = susfs_alloc_non_unshare_ksu_vfsmnt(fc->source ?:"none");\n\t\t\tgoto bypass_orig_flow;\n\t\t}\n\t}\n#endif\n\tmnt = alloc_vfsmnt(fc->source ?: "none");\n#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT\nbypass_orig_flow:\n#endif|' fs/namespace.c
     fi
 }
+ksu_fix_susfs_fourpointfour() {
+    if [[ "$KERNEL_VERSION" == "4.4" ]]; then
+        echo "-- KernelSU: Fixing fs/stat.c for SusFS on 4.4..."
+        if ! grep -q "linux/susfs_def.h" fs/stat.c; then
+            sed -i '/#include <asm\/unistd\.h>/a #include <linux/susfs_def.h>' fs/stat.c
+        fi
+        if ! grep -q "u32 sus_kstat_mask" fs/stat.c; then
+            sed -i '/struct inode \*inode = d_backing_inode(path->dentry);/a \	u32 sus_kstat_mask = 0;' fs/stat.c
+        fi
+        sed -i 's/stat->result_mask/sus_kstat_mask/g' fs/stat.c
+        echo "-- KernelSU: fs/stat.c patch applied successfully."
+    fi
+}
 ksu_apply_hooks() {
     if [[ "$KERNEL_VERSION" == "4.4" ]]; then
         echo "-- KernelSU: Downloading hook script..."

@@ -77,10 +77,10 @@ if [[ "$CLANG_STRAT" == "1" ]]; then
        		if ! tar -C clang -xf neutron-clang-*.tar.zst 2>/dev/null; then
 			echo "-- Error: Extraction failed! The archive might be corrupted." >&2
 			echo "-- Cleaning up corrupted files..."
-			rm -rf clang clang-*.tar.gz
+			rm -rf clang neutron-clang-*.tar.zst
 			exit 1
 		fi
-		rm clang-*.tar.gz
+		rm neutron-clang-*.tar.zst
 		echo "-- Clang successfully downloaded!"
 	else
 		echo "-- Using local $dir"

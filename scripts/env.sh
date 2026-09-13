@@ -30,14 +30,14 @@ export CLANG_STRAT=$(jq -r --arg t "$DEVICE_IMPORT" '.[$t].env.clang_strat // "1
 # Toolchain Settings
 echo "-- Exporting toolchain settings..."
 if [[ "$CLANG_STRAT" == "1" ]]; then
-    echo "-- Using new method to compile the kernel (AOSP Clang Only)"
+    echo "-- Using new method to compile the kernel (Neutron Clang)"
     export CLANG_ROOT="$PWD/clang"
     export PATH="$PWD/clang/bin/:$PATH"
     export MAKE_ARGS=(
             ARCH=arm64 LLVM=1 LLVM_IAS=1 LD=ld.lld
             CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_COMPAT=arm-linux-gnueabi- CROSS_COMPILE_ARM32=arm-linux-gnueabi-
     )
-    TC_URLS=$(curl -s https://api.github.com/repos/bachnxuan/aosp_clang_mirror/releases/latest | grep "browser_download_url" | head -n 1 | cut -d '"' -f 4)
+    TC_URLS=$(curl -s https://api.github.com/repos/Neutron-Toolchains/clang-build-catalogue/releases/latest | grep "browser_download_url" | head -n 1 | cut -d '"' -f 4)
 else
     echo "-- Using old method to compile the kernel (Clang + GCC64 + GCC32)"
     export CLANG_ROOT="$PWD/clang"
@@ -74,7 +74,7 @@ if [[ "$CLANG_STRAT" == "1" ]]; then
                 	fi
 		echo "-- Extracting Clang..."
         	mkdir -p clang
-       		if ! tar -C clang -xf clang-*.tar.gz 2>/dev/null; then
+       		if ! tar -C clang -xf neutron-clang-*.tar.zst 2>/dev/null; then
 			echo "-- Error: Extraction failed! The archive might be corrupted." >&2
 			echo "-- Cleaning up corrupted files..."
 			rm -rf clang clang-*.tar.gz

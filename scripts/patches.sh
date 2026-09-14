@@ -72,6 +72,13 @@ case "$DEVICE_IMPORT" in
         apply_patches "${DTC_PATCHES[@]}"
         echo "-- Applying DTB patches..."
         apply_patches "${DTBO_PATCHES[@]}"
+        echo "-- Completely disabling LTO..."
+        sed -i \
+            -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
+            -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
+            -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
+            -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
+            $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
@@ -92,6 +99,13 @@ case "$DEVICE_IMPORT" in
         find techpack/audio -name "Makefile*" -exec sed -i 's/obj-m/obj-y/g' {} +
         find techpack/audio -name "Kbuild*" -exec sed -i 's/obj-m/obj-y/g' {} +
         echo "CONFIG_SENSORS_SSC=y" >> $MAIN_DEFCONFIG
+        echo "-- Completely disabling LTO..."
+        sed -i \
+            -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
+            -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
+            -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
+            -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
+            $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG

@@ -44,11 +44,31 @@ DTC_PATCHES=(
     "https://github.com/LineageOS/android_kernel_xiaomi_sm6150/commit/ae58bbd8f7af4c3c290e63ddcd4112559c5fc240.patch"
 )
 LN8K_COMMON=(
-    "https://github.com/xiaomi-sm6150/android_kernel_xiaomi_sm6150/commit/05d8eac3722dcf920b716908d910ee704a77950e.patch"
-    "https://github.com/xiaomi-sm6150/android_kernel_xiaomi_sm6150/commit/eb3509401751b1e90a9b42e2f51326f2ef943af3.patch"
-    "https://github.com/xiaomi-sm6150/android_kernel_xiaomi_sm6150/commit/785c8f7976798acfc5cf300a320a43b3f39bcb13.patch"
-    "https://github.com/xiaomi-sm6150/android_kernel_xiaomi_sm6150/commit/e26ba40f3fac0238e410f8a29fa72aac012d75d2.patch"
-    "https://github.com/xiaomi-sm6150/android_kernel_xiaomi_sm6150/commit/6e50130d7bc99d1cc64196541af7a1780a703253.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/ade11a168d80de8552752447edad545851490b35.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/eb4aef5a0b917537ca4cc5357068390a8d2d680b.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/ddedab15a165c5c68737e30e813e40e785b1f921.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/2cc9ab3c0d7f6cdb98b1ee72aca104980c1e4415.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/6d8c5b25168981cb8f7e3ef758872b21f3d8a361.patch"
+)
+SMB5LIB_COMMON=(
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/ee2627b0cf620f8f5fb59d31f164c2ca91a72523.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/18d91e84dfa2235a37f370b0007dc603f33585e7.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/b4ecd5825986daa2dff4b3783edf50ee15d17e4c.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/509115dbee1e4486481b38f28e2dd789a86bd6ea.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/1e8e5057a05e8d7bbfcdce0394ca8ac112c31905.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/b6fb4a7f3fdc6b868356d4865f4dfaa4d6dfc277.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/db4a6db01697b60ab9a2664cd2eb9e21b839963a.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/f5b7ddef27899943896d1a513c7b42348cf6e84b.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/b9a40caa95d713142064c7b52ab5634ba6d17ef8.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/f499c5d97d5444d8df8519869f4912ebc795a2d2.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/7f03348a4fd273e1623777b32558d6f83e02aa6d.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/521709b3fcd89b1c84b784390523951fdaf21ad9.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/2c6eaf6c957aeb3d11a85476fd0f01f28d85bbcf.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/55abe8f43549cb92d002b76f44c7f678adb28ce1.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/3318d76d02e61a1a7e03e3442a97540bc0056f0a.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/6257f9c3e7ffce612532aca4a98dbd6c8ef4ebf8.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/cf62977aeeee0aed13f4ebfa3771f7cd960703d7.patch"
+    "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/a52850092fc5a2356ee5cadf4bd5d2b166c1c310.patch"
 )
 
 # Patcher - 1.5

@@ -65,7 +65,11 @@ jobs:
             lld python3 patchutils ccache libc6-dev unzip
 
       - name: Preparing kernel sources
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "- Setting up github token so it doesn't fail again..."
+          git config --global url."https://x-access-token:${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
           BUILD_TYPE="${{ matrix.build_type }}"
           CONFIG_FILE="devices/weekly.json"
           DIR=$(jq -r --arg target "$BUILD_TYPE" '.[$target].dir // empty' "$CONFIG_FILE")

@@ -36,11 +36,10 @@ Standard features:
 - Baseband Guard support   
 - NoMount Meta Module support   
 - ReKernel tombstones support  
-- Compiled with AOSP Clang 12 + Android GCC 4.9 
 
 Select features:   
 - Droidspaces container support
-- Compiled with Neutron Clang.
+- Compiled with either Neutron Clang, AOSP Clang + Eva GCC, Playground TC, or AOSP Clang + Android GCC 4.9
 
 # Compatibility
 Currently supported Operating System (Weekly release only)   

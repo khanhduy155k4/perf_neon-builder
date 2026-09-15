@@ -83,6 +83,7 @@ case "$DEVICE_IMPORT" in
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -100,6 +101,7 @@ case "$DEVICE_IMPORT" in
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -122,6 +124,7 @@ case "$DEVICE_IMPORT" in
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -149,6 +152,7 @@ case "$DEVICE_IMPORT" in
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_FRAME_WARN=4096" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
@@ -183,6 +187,7 @@ case "$DEVICE_IMPORT" in
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -198,6 +203,7 @@ case "$DEVICE_IMPORT" in
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_FRAME_WARN=4096" >> $MAIN_DEFCONFIG
         echo "CONFIG_CHECKPOINT_RESTORE=y" >> $MAIN_DEFCONFIG
@@ -221,6 +227,7 @@ case "$DEVICE_IMPORT" in
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -235,6 +242,7 @@ case "$DEVICE_IMPORT" in
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -281,6 +289,7 @@ case "$DEVICE_IMPORT" in
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SHADOW_CALL_STACK=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_KALLSYMS_ALL=y" >> $MAIN_DEFCONFIG
     ;;
@@ -302,6 +311,7 @@ case "$DEVICE_IMPORT" in
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -329,6 +339,7 @@ case "$DEVICE_IMPORT" in
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG

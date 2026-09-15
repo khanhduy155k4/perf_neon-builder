@@ -90,6 +90,12 @@ case "$DEVICE_IMPORT" in
         apply_patches "${DTBO_PATCHES[@]}"
         echo "-- Disabling modversions..."
         sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
+        echo "-- Enabling EROFS support..."
+        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -110,6 +116,12 @@ case "$DEVICE_IMPORT" in
         apply_patches "${DTBO_PATCHES[@]}"
         echo "-- Disabling modversions..."
         sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
+        echo "-- Enabling EROFS support..."
+        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -135,6 +147,12 @@ case "$DEVICE_IMPORT" in
         echo "CONFIG_SENSORS_SSC=y" >> $MAIN_DEFCONFIG
         echo "-- Disabling modversions..."
         sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
+        echo "-- Enabling EROFS support..."
+        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -165,6 +183,12 @@ case "$DEVICE_IMPORT" in
         fi
         echo "-- Disabling modversions..."
         sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
+        echo "-- Enabling EROFS support..."
+        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -202,6 +226,12 @@ case "$DEVICE_IMPORT" in
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/3c8c1cd917d6b986bdbe88d66571b91a804d8add.patch"
         echo "-- Disabling modversions..."
         sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
+        echo "-- Enabling EROFS support..."
+        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG1
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -220,6 +250,12 @@ case "$DEVICE_IMPORT" in
         git reset --hard 78088ffb401b570b8de9408662c8fc931e9cf1a5 &> /dev/null
         echo "-- Disabling modversions..."
         sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
+        echo "-- Enabling EROFS support..."
+        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -312,6 +348,12 @@ case "$DEVICE_IMPORT" in
         }' techpack/xiaomi-msm8937/touchscreen/focaltech_touch/focaltech_point_report_check.c
         echo "-- Disabling modversions..."
         sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
+        echo "-- Enabling EROFS support..."
+        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
@@ -335,6 +377,12 @@ case "$DEVICE_IMPORT" in
         #     $MAIN_DEFCONFIG
         # echo "-- Removing regalloc advisor..."
         # sed -i '/-regalloc-enable-advisor=release/d' Makefile
+        echo "-- Enabling EROFS support..."
+        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -363,6 +411,12 @@ case "$DEVICE_IMPORT" in
         #     $MAIN_DEFCONFIG
         # echo "-- Removing regalloc advisor..."
         # sed -i '/-regalloc-enable-advisor=release/d' Makefile
+        echo "-- Enabling EROFS support..."
+        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG

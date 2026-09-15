@@ -346,14 +346,6 @@ case "$DEVICE_IMPORT" in
             }\
             ts_data->key_state = 0;\
         }' techpack/xiaomi-msm8937/touchscreen/focaltech_touch/focaltech_point_report_check.c
-        echo "-- Disabling modversions..."
-        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
-        echo "-- Enabling EROFS support..."
-        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG

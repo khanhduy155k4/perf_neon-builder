@@ -38,8 +38,20 @@ if [[ "$CLANG_STRAT" == "1" ]]; then
             CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_COMPAT=arm-linux-gnueabi- CROSS_COMPILE_ARM32=arm-linux-gnueabi-
     )
     TC_URLS=$(curl -s https://api.github.com/repos/Neutron-Toolchains/clang-build-catalogue/releases/latest | grep "browser_download_url" | head -n 1 | cut -d '"' -f 4)
+elif [[ "$CLANG_STRAT" == "2" ]]; then
+    echo "-- Using new method to compile the kernel (AOSP Clang + Eva GCC)"
+    export CLANG_ROOT="$PWD/clang"
+    export GCC64_ROOT="$PWD/gcc64"
+    export GCC32_ROOT="$PWD/gcc32"
+    export PATH="$CLANG_ROOT/bin:$GCC64_ROOT/bin:$GCC32_ROOT/bin:/usr/bin:$PATH"
+    export MAKE_ARGS=(
+            ARCH=arm64 LLVM=1 LLVM_IAS=1 CROSS_COMPILE=$GCC64_DIR/bin/aarch64-elf-
+            CROSS_COMPILE_COMPAT=$GCC32_DIR/bin/arm-eabi-
+    )
+    TC_URLS_CLANG=("clang|https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r547379.git")
+    TC_URLS_GCC64=$(curl -s https://api.github.com/repos/mvaisakh/gcc-build/releases/latest | grep "browser_download_url" | cut -d '"' -f 4 | grep -E "eva-gcc-arm.*\.xz")
 else
-    echo "-- Using old method to compile the kernel (Clang + GCC64 + GCC32)"
+    echo "-- Using old method to compile the kernel (AOSP Clang + Android GCC 4.9)"
     export CLANG_ROOT="$PWD/clang"
     export GCC64_ROOT="$PWD/gcc64"
     export GCC32_ROOT="$PWD/gcc32"
@@ -85,6 +97,34 @@ if [[ "$CLANG_STRAT" == "1" ]]; then
 	else
 		echo "-- Using local $dir"
 	fi
+elif [[ "$CLANG_STRAT" == "2" ]]; then
+    for tc in "${TC_URLS_CLANG[@]}"; do
+        dir="${tc%%|*}"; url="${tc##*|}"
+        if [[ "$url" == *.git ]]; then
+            if [ ! -d "$dir/.git" ]; then
+                echo "-- Cloning $dir..."
+                rm -rf "$dir"
+                git clone "$url" --depth=1 "$dir" &> /dev/null || { echo "-- Fatal: Failed to clone $dir!"; exit 1; }
+            else
+                echo "-- Using local $dir"
+            fi
+        fi
+    done
+
+    echo "-- Downloading Eva GCC..."
+    for url in $TC_URLS_GCC64; do
+      wget --content-disposition -qL "$url"
+    done
+    for file in eva-gcc-arm*.xz; do
+      if [[ "$file" == *arm64* ]]; then
+        tar -xf "$file" 2>/dev/null
+        mv gcc-arm64 gcc64
+      else
+        tar -xf "$file" 2>/dev/null
+        mv gcc-arm gcc32
+      fi
+      rm -rf "$file"
+    done
 else
     for tc in "${TC_URLS[@]}"; do
         dir="${tc%%|*}"; url="${tc##*|}"

@@ -288,7 +288,7 @@ case "$DEVICE_IMPORT" in
         echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
     ;;
     # Awaken
-    sweet-awaken)
+    sweet-awaken|davinci-awaken)
         echo "-- Disabling modversions..."
         sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."

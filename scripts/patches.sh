@@ -76,6 +76,8 @@ echo "- Patching kernel source for $DEVICE_IMPORT..."
 case "$DEVICE_IMPORT" in
     # LineageOS
     sweet-lineage|davinci-lineage|tucana-lineage|violet-lineage|toco-lineage)
+        echo "-- Applying LTO patch..."
+        apply_patches "$LTO_PATCH"
         echo "-- Applying DTB patches..."
         apply_patches "${DTBO_PATCHES[@]}"
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
@@ -92,13 +94,6 @@ case "$DEVICE_IMPORT" in
         apply_patches "${DTC_PATCHES[@]}"
         echo "-- Applying DTB patches..."
         apply_patches "${DTBO_PATCHES[@]}"
-        echo "-- Completely disabling LTO..."
-        sed -i \
-            -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
-            -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
-            -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
-            -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
-            $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
@@ -119,13 +114,6 @@ case "$DEVICE_IMPORT" in
         find techpack/audio -name "Makefile*" -exec sed -i 's/obj-m/obj-y/g' {} +
         find techpack/audio -name "Kbuild*" -exec sed -i 's/obj-m/obj-y/g' {} +
         echo "CONFIG_SENSORS_SSC=y" >> $MAIN_DEFCONFIG
-        echo "-- Completely disabling LTO..."
-        sed -i \
-            -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
-            -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
-            -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
-            -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
-            $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
@@ -151,13 +139,6 @@ case "$DEVICE_IMPORT" in
             sed -i 's/struct i2c_client \*getClient()/struct i2c_client \*getClient(void)/g' drivers/input/touchscreen/fts_521/fts_lib/ftsIO.c
             echo "ccflags-y += -Wno-strict-prototypes" >> drivers/input/touchscreen/fts_521/Makefile
         fi
-        echo "-- Completely disabling LTO..."
-        sed -i \
-            -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
-            -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
-            -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
-            -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
-            $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_FRAME_WARN=4096" >> $MAIN_DEFCONFIG
@@ -203,24 +184,6 @@ case "$DEVICE_IMPORT" in
     sweet-crdroid-droidspaces)
         echo "-- Reverting hard to commits before KSU is being added..."
         git reset --hard 78088ffb401b570b8de9408662c8fc931e9cf1a5 &> /dev/null
-        if [[ "$DEVICE_IMPORT" == "tucana-crdroid" ]]; then
-            echo "-- Fixing goodix driver..."
-            sed -i 's/static void gtp_set_edge_filter_normal()/static void gtp_set_edge_filter_normal(void)/g' drivers/input/touchscreen/f4_goodix_driver_gt9886/goodix_ts_core.c
-            sed -i 's/static int gtp_send_cur_cmd()/static int gtp_send_cur_cmd(void)/g' drivers/input/touchscreen/f4_goodix_driver_gt9886/goodix_ts_core.c
-            echo "-- Fixing fts driver..."
-            sed -i 's/"%100s %d %d"/"%99s %d %d"/g' drivers/input/touchscreen/fts_521/fts.c
-            sed -i 's/"%100s"/"%99s"/g' drivers/input/touchscreen/fts_521/fts_proc.c
-            sed -i 's/struct device \*getDev()/struct device \*getDev(void)/g' drivers/input/touchscreen/fts_521/fts_lib/ftsIO.c
-            sed -i 's/struct i2c_client \*getClient()/struct i2c_client \*getClient(void)/g' drivers/input/touchscreen/fts_521/fts_lib/ftsIO.c
-            echo "ccflags-y += -Wno-strict-prototypes" >> drivers/input/touchscreen/fts_521/Makefile
-        fi
-        echo "-- Completely disabling LTO..."
-        sed -i \
-            -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
-            -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
-            -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
-            -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
-            $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_FRAME_WARN=4096" >> $MAIN_DEFCONFIG
@@ -308,17 +271,17 @@ case "$DEVICE_IMPORT" in
     spiteful-sweet-miui-buildout)
         echo "-- Reverting hard to commits before KSU is being added..."
         git reset --hard 1c950660849776c0105ae268270acb590d1df308 &> /dev/null
-        echo "-- Completely disabling LTO..."
-        sed -i \
-            -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
-            -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
-            -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
-            -e 's/^CONFIG_CC_STACKPROTECTOR_STRONG=y/# CONFIG_CC_STACKPROTECTOR_STRONG is not set/' \
-            -e 's/^# CONFIG_CC_STACKPROTECTOR_NONE is not set/CONFIG_CC_STACKPROTECTOR_NONE=y/' \
-            -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
-            $MAIN_DEFCONFIG
-        echo "-- Removing regalloc advisor..."
-        sed -i '/-regalloc-enable-advisor=release/d' Makefile
+        # echo "-- Completely disabling LTO..."
+        # sed -i \
+        #     -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
+        #     -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
+        #     -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
+        #     -e 's/^CONFIG_CC_STACKPROTECTOR_STRONG=y/# CONFIG_CC_STACKPROTECTOR_STRONG is not set/' \
+        #     -e 's/^# CONFIG_CC_STACKPROTECTOR_NONE is not set/CONFIG_CC_STACKPROTECTOR_NONE=y/' \
+        #     -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
+        #     $MAIN_DEFCONFIG
+        # echo "-- Removing regalloc advisor..."
+        # sed -i '/-regalloc-enable-advisor=release/d' Makefile
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
@@ -333,17 +296,17 @@ case "$DEVICE_IMPORT" in
     spiteful-sweet-aosp-buildout)
         echo "-- Reverting hard to commits before KSU is being added..."
         git reset --hard 1b133f3054948bee6c59332c83699ff2b95d7978 &> /dev/null
-        echo "-- Completely disabling LTO..."
-        sed -i \
-            -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
-            -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
-            -e 's/^CONFIG_CC_STACKPROTECTOR_STRONG=y/# CONFIG_CC_STACKPROTECTOR_STRONG is not set/' \
-            -e 's/^# CONFIG_CC_STACKPROTECTOR_NONE is not set/CONFIG_CC_STACKPROTECTOR_NONE=y/' \
-            -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
-            -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
-            $MAIN_DEFCONFIG
-        echo "-- Removing regalloc advisor..."
-        sed -i '/-regalloc-enable-advisor=release/d' Makefile
+        # echo "-- Completely disabling LTO..."
+        # sed -i \
+        #     -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
+        #     -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
+        #     -e 's/^CONFIG_CC_STACKPROTECTOR_STRONG=y/# CONFIG_CC_STACKPROTECTOR_STRONG is not set/' \
+        #     -e 's/^# CONFIG_CC_STACKPROTECTOR_NONE is not set/CONFIG_CC_STACKPROTECTOR_NONE=y/' \
+        #     -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
+        #     -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
+        #     $MAIN_DEFCONFIG
+        # echo "-- Removing regalloc advisor..."
+        # sed -i '/-regalloc-enable-advisor=release/d' Makefile
         echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
@@ -418,6 +381,12 @@ if [[ "$CLANG_STRAT" == "1" ]]; then
         sed -i '/export KBUILD_CFLAGS/i \
         KBUILD_CFLAGS += -mllvm -polly -mllvm -enable-gvn-hoist -Wno-unused-command-line-argument' Makefile
     fi
+fi
+
+if [[ "$CLANG_STRAT" == "2" ]]; then
+    echo "- Variable clang_strat is set to 2! applying extra patches..."
+    echo "-- Setting up -O3 flags..."
+    sed -i 's/KBUILD_CFLAGS.*+= -O2/KBUILD_CFLAGS   += -O3/g' Makefile
 fi
 
 if [[ "$CLANG_STRAT" == "0" ]]; then

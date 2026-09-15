@@ -147,6 +147,9 @@ elif [[ "$CLANG_STRAT" == "3" ]]; then
 		rm -rf clang playgroundtc.tar.gz
 	    exit 1
 	fi
+    cd clang/
+    mv playgroundtc/* .
+    cd ..
 	rm playgroundtc.tar.gz
 	echo "-- Clang successfully downloaded!"
 else

@@ -14,7 +14,7 @@
       "common_defconfig": "vendor/debugfs.config",
       "device_defconfig": "",
       "kernel_name": "-pixelos-neon",
-      "clang_strat": "1"
+      "clang_strat": "3"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -42,7 +42,7 @@
       "common_defconfig": "vendor/debugfs.config",
       "device_defconfig": "",
       "kernel_name": "-pixelos-neon",
-      "clang_strat": "1"
+      "clang_strat": "3"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -70,7 +70,7 @@
       "common_defconfig": "vendor/debugfs.config",
       "device_defconfig": "",
       "kernel_name": "-pixelos-neon",
-      "clang_strat": "1"
+      "clang_strat": "3"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 

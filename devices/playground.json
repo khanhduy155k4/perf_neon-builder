@@ -173,7 +173,7 @@
       "common_defconfig": "vendor/debugfs.config",
       "device_defconfig": "",
       "kernel_name": "-awaken-neon",
-      "clang_strat": "0"
+      "clang_strat": "3"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 

@@ -218,8 +218,6 @@ case "$DEVICE_IMPORT" in
             apply_patches "${LN8K_COMMON[@]}"
             echo "CONFIG_CHARGER_LN8000=y" >> $MAIN_DEFCONFIG
         fi
-        echo "-- Applying LTO patch..."
-        apply_patches "$LTO_PATCH"
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -234,8 +232,6 @@ case "$DEVICE_IMPORT" in
     ;;
     # Awaken
     sweet-awaken)
-        echo "-- Applying LTO patch..."
-        apply_patches "$LTO_PATCH"
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG

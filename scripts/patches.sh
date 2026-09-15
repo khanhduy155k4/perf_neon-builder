@@ -145,14 +145,6 @@ case "$DEVICE_IMPORT" in
         find techpack/audio -name "Makefile*" -exec sed -i 's/obj-m/obj-y/g' {} +
         find techpack/audio -name "Kbuild*" -exec sed -i 's/obj-m/obj-y/g' {} +
         echo "CONFIG_SENSORS_SSC=y" >> $MAIN_DEFCONFIG
-        echo "-- Disabling modversions..."
-        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
-        echo "-- Enabling EROFS support..."
-        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG

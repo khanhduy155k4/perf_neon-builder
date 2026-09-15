@@ -80,6 +80,9 @@ case "$DEVICE_IMPORT" in
         apply_patches "$LTO_PATCH"
         echo "-- Applying DTB patches..."
         apply_patches "${DTBO_PATCHES[@]}"
+        echo "-- Tuning default configs..."
+        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -95,6 +98,8 @@ case "$DEVICE_IMPORT" in
         echo "-- Applying DTB patches..."
         apply_patches "${DTBO_PATCHES[@]}"
         echo "-- Tuning default configs..."
+        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -115,6 +120,8 @@ case "$DEVICE_IMPORT" in
         find techpack/audio -name "Kbuild*" -exec sed -i 's/obj-m/obj-y/g' {} +
         echo "CONFIG_SENSORS_SSC=y" >> $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
+        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -140,6 +147,8 @@ case "$DEVICE_IMPORT" in
             echo "ccflags-y += -Wno-strict-prototypes" >> drivers/input/touchscreen/fts_521/Makefile
         fi
         echo "-- Tuning default configs..."
+        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_FRAME_WARN=4096" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
@@ -172,6 +181,8 @@ case "$DEVICE_IMPORT" in
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/80652cb8b40fd63da65ea046f39ecb86de5dc648.patch"
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/3c8c1cd917d6b986bdbe88d66571b91a804d8add.patch"
         echo "-- Tuning default configs..."
+        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -185,6 +196,8 @@ case "$DEVICE_IMPORT" in
         echo "-- Reverting hard to commits before KSU is being added..."
         git reset --hard 78088ffb401b570b8de9408662c8fc931e9cf1a5 &> /dev/null
         echo "-- Tuning default configs..."
+        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_FRAME_WARN=4096" >> $MAIN_DEFCONFIG
         echo "CONFIG_CHECKPOINT_RESTORE=y" >> $MAIN_DEFCONFIG
@@ -283,6 +296,8 @@ case "$DEVICE_IMPORT" in
         # echo "-- Removing regalloc advisor..."
         # sed -i '/-regalloc-enable-advisor=release/d' Makefile
         echo "-- Tuning default configs..."
+        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
@@ -308,6 +323,8 @@ case "$DEVICE_IMPORT" in
         # echo "-- Removing regalloc advisor..."
         # sed -i '/-regalloc-enable-advisor=release/d' Makefile
         echo "-- Tuning default configs..."
+        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG

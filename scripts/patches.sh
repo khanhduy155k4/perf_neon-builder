@@ -80,6 +80,8 @@ case "$DEVICE_IMPORT" in
         apply_patches "$LTO_PATCH"
         echo "-- Applying DTB patches..."
         apply_patches "${DTBO_PATCHES[@]}"
+        echo "-- Disabling modversions..."
+        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -98,6 +100,8 @@ case "$DEVICE_IMPORT" in
         apply_patches "${DTC_PATCHES[@]}"
         echo "-- Applying DTB patches..."
         apply_patches "${DTBO_PATCHES[@]}"
+        echo "-- Disabling modversions..."
+        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -121,6 +125,8 @@ case "$DEVICE_IMPORT" in
         find techpack/audio -name "Makefile*" -exec sed -i 's/obj-m/obj-y/g' {} +
         find techpack/audio -name "Kbuild*" -exec sed -i 's/obj-m/obj-y/g' {} +
         echo "CONFIG_SENSORS_SSC=y" >> $MAIN_DEFCONFIG
+        echo "-- Disabling modversions..."
+        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -149,6 +155,8 @@ case "$DEVICE_IMPORT" in
             sed -i 's/struct i2c_client \*getClient()/struct i2c_client \*getClient(void)/g' drivers/input/touchscreen/fts_521/fts_lib/ftsIO.c
             echo "ccflags-y += -Wno-strict-prototypes" >> drivers/input/touchscreen/fts_521/Makefile
         fi
+        echo "-- Disabling modversions..."
+        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -184,6 +192,8 @@ case "$DEVICE_IMPORT" in
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/340e3b3a4662d51dd743b087d440a2538534d576.patch"
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/80652cb8b40fd63da65ea046f39ecb86de5dc648.patch"
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/3c8c1cd917d6b986bdbe88d66571b91a804d8add.patch"
+        echo "-- Disabling modversions..."
+        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -200,6 +210,8 @@ case "$DEVICE_IMPORT" in
     sweet-crdroid-droidspaces)
         echo "-- Reverting hard to commits before KSU is being added..."
         git reset --hard 78088ffb401b570b8de9408662c8fc931e9cf1a5 &> /dev/null
+        echo "-- Disabling modversions..."
+        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
         echo "-- Tuning default configs..."
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
@@ -290,6 +302,9 @@ case "$DEVICE_IMPORT" in
             }\
             ts_data->key_state = 0;\
         }' techpack/xiaomi-msm8937/touchscreen/focaltech_touch/focaltech_point_report_check.c
+        echo "-- Disabling modversions..."
+        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
+        echo "-- Tuning default configs..."
         echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG

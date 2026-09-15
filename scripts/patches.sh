@@ -414,6 +414,12 @@ if [[ "$CLANG_STRAT" == "2" ]]; then
     sed -i 's/KBUILD_CFLAGS.*+= -O2/KBUILD_CFLAGS   += -O3/g' Makefile
 fi
 
+if [[ "$CLANG_STRAT" == "3" ]]; then
+    echo "- Variable clang_strat is set to 3! applying extra patches..."
+    echo "-- Setting up -O3 flags..."
+    sed -i 's/KBUILD_CFLAGS.*+= -O2/KBUILD_CFLAGS   += -O3/g' Makefile
+fi
+
 if [[ "$CLANG_STRAT" == "0" ]]; then
     if [[ $DEVICE_IMPORT != "a9y18qlte-titan-aosp" ]]; then
         echo "- Variable clang_strat is set to 0! applying extra patches..."

@@ -30,7 +30,7 @@ export CLANG_STRAT=$(jq -r --arg t "$DEVICE_IMPORT" '.[$t].env.clang_strat // "1
 # Toolchain Settings
 echo "-- Exporting toolchain settings..."
 if [[ "$CLANG_STRAT" == "1" ]]; then
-    echo "-- Using new method to compile the kernel (Neutron Clang)"
+    echo "-- Using Neutron Clang to compile the kernel"
     export CLANG_ROOT="$PWD/clang"
     export PATH="$PWD/clang/bin/:$PATH"
     export MAKE_ARGS=(
@@ -39,7 +39,7 @@ if [[ "$CLANG_STRAT" == "1" ]]; then
     )
     TC_URLS=$(curl -s https://api.github.com/repos/Neutron-Toolchains/clang-build-catalogue/releases/latest | grep "browser_download_url" | head -n 1 | cut -d '"' -f 4)
 elif [[ "$CLANG_STRAT" == "2" ]]; then
-    echo "-- Using new method to compile the kernel (AOSP Clang + Eva GCC)"
+    echo "-- Using AOSP Clang + Eva GCC to compile the kernel"
     export CLANG_ROOT="$PWD/clang"
     export GCC64_ROOT="$PWD/gcc64"
     export GCC32_ROOT="$PWD/gcc32"
@@ -50,8 +50,17 @@ elif [[ "$CLANG_STRAT" == "2" ]]; then
     )
     TC_URLS_CLANG=("clang|https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r547379.git")
     TC_URLS_GCC64=$(curl -s https://api.github.com/repos/mvaisakh/gcc-build/releases/latest | grep "browser_download_url" | cut -d '"' -f 4 | grep -E "eva-gcc-arm.*\.xz")
+elif [[ "$CLANG_STRAT" == "3" ]]; then
+    echo "-- Using Playground TC to compile the kernel"
+    export CLANG_ROOT="$PWD/clang"
+    export PATH="$CLANG_ROOT/bin:$PATH"
+    export MAKE_ARGS=(
+            ARCH=arm64 LLVM=1 LLVM_IAS=1 CROSS_COMPILE=aarch64-linux-gnu-
+            CROSS_COMPILE_ARM32=arm-linux-gnueabi-
+    )
+    TC_URLS=("https://github.com/basamaryan/kernel_xiaomi_sm6150/releases/download/18/playgroundtc.tar.gz")
 else
-    echo "-- Using old method to compile the kernel (AOSP Clang + Android GCC 4.9)"
+    echo "-- Using AOSP Clang + Android GCC 4.9 to compile the kernel"
     export CLANG_ROOT="$PWD/clang"
     export GCC64_ROOT="$PWD/gcc64"
     export GCC32_ROOT="$PWD/gcc32"
@@ -125,6 +134,21 @@ elif [[ "$CLANG_STRAT" == "2" ]]; then
       fi
       rm -rf "$file"
     done
+elif [[ "$CLANG_STRAT" == "3" ]]; then
+    echo "-- Downloading Playground TC..."
+    for url in $TC_URLS; do
+      wget -q "$url"
+    done
+    echo "-- Extracting Clang..."
+    mkdir -p clang
+    if ! tar -C clang -xf playgroundtc.tar.gz 2>/dev/null; then
+		echo "-- Error: Extraction failed! The archive might be corrupted." >&2
+		echo "-- Cleaning up corrupted files..."
+		rm -rf clang playgroundtc.tar.gz
+	    exit 1
+	fi
+	rm playgroundtc.tar.gz
+	echo "-- Clang successfully downloaded!"
 else
     for tc in "${TC_URLS[@]}"; do
         dir="${tc%%|*}"; url="${tc##*|}"

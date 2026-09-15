@@ -1,10 +1,14 @@
 #!/bin/bash
 
-# Patcher helper - 1.5
+# Patcher helper - 1.7
 apply_patches() {
     for patch_url in "$@"; do
         echo "-- Applying patch: $(basename "$patch_url")"
-        curl -sL --fail --retry 3 "$patch_url" -o /tmp/temp_patch.patch
+        if [[ "$GITHUB_TOKEN" == "" ]]; then
+            curl -sL --fail --retry 3 "$patch_url" -o /tmp/temp_patch.patch
+        else
+            curl -sL --fail --retry 3 -H "Authorization: Bearer $GITHUB_TOKEN" "$patch_url" -o /tmp/temp_patch.patch
+        fi
         if [ -s /tmp/temp_patch.patch ]; then
             patch -s -p1 --fuzz=5 < /tmp/temp_patch.patch || { echo "Fatal: Failed to apply patch!"; exit 1; }
         else
@@ -14,11 +18,15 @@ apply_patches() {
     done
 }
 
-# Commit reverter - 1.5
+# Commit reverter - 1.7
 revert_commit() {
     for patch_url in "$@"; do
         echo "-- Reverting commit: $(basename "$patch_url")"
-        curl -sL --fail --retry 3 "$patch_url" -o /tmp/temp_revert.patch
+        if [[ "$GITHUB_TOKEN" == "" ]]; then
+            curl -sL --fail --retry 3 "$patch_url" -o /tmp/temp_revert.patch
+        else
+            curl -sL --fail --retry 3 -H "Authorization: Bearer $GITHUB_TOKEN" "$patch_url" -o /tmp/temp_revert.patch
+        fi
         if [ -s /tmp/temp_revert.patch ]; then
             patch -R -s -p1 < /tmp/temp_revert.patch || { echo "Fatal: Failed to revert commit!"; exit 1; }
         else

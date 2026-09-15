@@ -14,7 +14,7 @@
       "common_defconfig": "vendor/debugfs.config",
       "device_defconfig": "",
       "kernel_name": "-pixelos-neon",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -24,7 +24,7 @@
       "rekernel_type": "rekernel"
     },
     "sources": [
-      { "repo": "https://github.com/PixelOS-Devices/android_kernel_xiaomi_sm6150.git", "branch": "sixteen-qpr2", "path": "." }
+      { "repo": "https://github.com/PixelOS-Devices/android_kernel_xiaomi_sm6150.git", "branch": "seventeen", "path": "." }
     ]
   },
   "davinci-pixelos": {
@@ -42,7 +42,7 @@
       "common_defconfig": "vendor/debugfs.config",
       "device_defconfig": "",
       "kernel_name": "-pixelos-neon",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -52,7 +52,7 @@
       "rekernel_type": "rekernel"
     },
     "sources": [
-      { "repo": "https://github.com/PixelOS-Devices/android_kernel_xiaomi_sm6150.git", "branch": "sixteen-qpr2", "path": "." }
+      { "repo": "https://github.com/PixelOS-Devices/android_kernel_xiaomi_sm6150.git", "branch": "seventeen", "path": "." }
     ]
   },
   "toco-pixelos": {
@@ -70,7 +70,7 @@
       "common_defconfig": "vendor/debugfs.config",
       "device_defconfig": "",
       "kernel_name": "-pixelos-neon",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -80,7 +80,7 @@
       "rekernel_type": "rekernel"
     },
     "sources": [
-      { "repo": "https://github.com/PixelOS-Devices/android_kernel_xiaomi_sm6150.git", "branch": "sixteen-qpr2", "path": "." }
+      { "repo": "https://github.com/PixelOS-Devices/android_kernel_xiaomi_sm6150.git", "branch": "seventeen", "path": "." }
     ]
   },
   "sweet-lineage": {
@@ -100,7 +100,7 @@
       "feature_defconfig": "",
       "kernel_name": "-lineage-neon",
       "kernel_version": "4.14",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -130,7 +130,7 @@
       "feature_defconfig": "",
       "kernel_name": "-lineage-neon",
       "kernel_version": "4.14",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -160,7 +160,7 @@
       "feature_defconfig": "",
       "kernel_name": "-lineage-neon",
       "kernel_version": "4.14",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -190,7 +190,7 @@
       "feature_defconfig": "",
       "kernel_name": "-lineage-neon",
       "kernel_version": "4.14",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -220,7 +220,7 @@
       "feature_defconfig": "",
       "kernel_name": "-lineage-neon",
       "kernel_version": "4.14",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -251,7 +251,7 @@
       "kernel_name": "-lineage-neon",
       "kernel_version": "4.14",
       "kbuild_build_user": "hiyorun-compile",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -282,7 +282,7 @@
       "kernel_name": "-lineage-neon",
       "kernel_version": "4.14",
       "kbuild_build_user": "hiyorun-compile",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -312,7 +312,7 @@
       "kernel_name": "-lineage-neon",
       "kernel_version": "4.19",
       "kbuild_build_user": "hassansody-compile",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -342,7 +342,7 @@
       "feature_defconfig": "",
       "kernel_name": "-crdroid-neon",
       "kernel_version": "4.14",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -372,7 +372,7 @@
       "feature_defconfig": "",
       "kernel_name": "-crdroid-neon",
       "kernel_version": "4.14",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -402,7 +402,7 @@
       "feature_defconfig": "",
       "kernel_name": "-crdroid-neon",
       "kernel_version": "4.14",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -432,7 +432,7 @@
       "feature_defconfig": "",
       "kernel_name": "-crdroid-neon",
       "kernel_version": "4.14",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 

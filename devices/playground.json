@@ -145,7 +145,7 @@
       "feature_defconfig": "",
       "kernel_name": "-crdroid-droidspaces-neon",
       "kernel_version": "4.14",
-      "clang_strat": "0"
+      "clang_strat": "1"
     },
     "build_flags": {
       "ksu_type": ["zako-susfs", "none"], 
@@ -183,7 +183,7 @@
       "rekernel_type": "rekernel"
     },
     "sources": [
-      { "repo": "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150", "branch": "seventeen", "path": "." }
+      { "repo": "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150", "branch": "seventeen-power", "path": "." }
     ]
   }
 }

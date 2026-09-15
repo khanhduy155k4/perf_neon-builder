@@ -183,7 +183,7 @@
       "rekernel_type": "rekernel"
     },
     "sources": [
-      { "repo": "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150", "branch": "seventeen-power", "path": "." }
+      { "repo": "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150", "branch": "seventeen", "path": "." }
     ]
   }
 }

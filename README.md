@@ -41,6 +41,17 @@ Select features:
 - Droidspaces container support
 - Compiled with either Neutron Clang, AOSP Clang + Eva GCC, Playground TC, or AOSP Clang + Android GCC 4.9
 
+Current status:
+- ```lineage-neon```: Standard + Neutron Clang   
+- ```crdroid-neon```: Standard + Neutron Clang   
+- ```pixelos-neon```: Standard + Playground TC   
+- ```mithorium```: Standard + Neutron Clang   
+- ```spiteful```: Standard + AOSP Clang + Eva GCC   
+- ```titan```: KSU & SUSFS + Android GCC 4.9   
+
+Derivatives:
+- ```droidspaces```: `crdroid-neon` features + Droidspaces
+
 # Compatibility
 Currently supported Operating System (Weekly release only)   
 - LineageOS   
@@ -63,13 +74,15 @@ Externally compiled kernels
 - Redmi 4A/5A/Note 5A Lite/Y1 Lite ([mi8917](https://download.lineageos.org/devices/Mi8917/builds)) from Mi-Thorium   
 - Redmi 3/3S/4/4X/Note 5A Prime/Y1 Prime ([mi8937](https://download.lineageos.org/devices/Mi8937/builds)) from Mi-Thorium    
 - Redmi Note 10 Pro/Pro Max ([sweet](https://github.com/tbyool/android_kernel_xiaomi_sm6150)) from Spiteful Kernel   
+- Samsung Galaxy A9 (2018) ([a9y18qlte](https://github.com/schr-0dinger/android_kernel_samsung_a9y18qlte)) from Titan Kernel
 
 Android Version Constraints
 - ```lineage-neon```: Android 13 to Android 17.   
 - ```crdroid-neon```: Android 13 to Android 17.   
 - ```pixelos-neon```: Android 13 to Android 17.   
-- ```mithorium```: Android 11 to Android 17.
-- ```spiteful```: Android 11 to Android 15.
+- ```mithorium```: Android 11 to Android 17.   
+- ```spiteful```: Android 11 to Android 15.   
+- ```titan```: Android 10 to Android 11.
 
 Notes   
 - Kernels that released on playground is not restricted with these OS constraints.   

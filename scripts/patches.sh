@@ -237,7 +237,7 @@ case "$DEVICE_IMPORT" in
         echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
         echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
     ;;
-    sweet-crdroid-droidspaces)
+    sweet-crdroid-droidspaces|davinci-crdroid-droidspaces)
         echo "-- Reverting hard to commits before KSU is being added..."
         git reset --hard 78088ffb401b570b8de9408662c8fc931e9cf1a5 &> /dev/null
         echo "-- Disabling modversions..."

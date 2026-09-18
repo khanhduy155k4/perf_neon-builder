@@ -158,6 +158,36 @@
       { "repo": "https://github.com/crdroidandroid/android_kernel_xiaomi_sm6150", "branch": "16.0", "path": "." }
     ]
   },
+  "davinci-crdroid-droidspaces": {
+    "dir": "android_kernel_xiaomi_sm6150",
+    "image": "Image.gz",
+    "dtb": "",
+    "dtbo": "dtbo.img",
+    "supported_versions": "13-17",
+    "device_names": ["davinci", "davinciin"],
+    "banner": "davinci (sm6150)",
+    "zip_prefix": "droidspaces-neon-davinci-weekly",
+    "env": {
+      "main_defconfig": "arch/arm64/configs/vendor/sdmsteppe-perf_defconfig",
+      "actual_main_defconfig": "vendor/sdmsteppe-perf_defconfig",
+      "common_defconfig": "vendor/debugfs.config",
+      "device_defconfig": "vendor/davinci.config",
+      "feature_defconfig": "",
+      "kernel_name": "-crdroid-droidspaces-neon",
+      "kernel_version": "4.14",
+      "clang_strat": "1"
+    },
+    "build_flags": {
+      "ksu_type": ["zako-susfs", "none"], 
+      "bbg_type": "bbg",
+      "nomount_type": "nomount",
+      "droidspaces_type": "droidspaces",
+      "rekernel_type": "rekernel"
+    },
+    "sources": [
+      { "repo": "https://github.com/crdroidandroid/android_kernel_xiaomi_sm6150", "branch": "16.0", "path": "." }
+    ]
+  },
   "sweet-awaken": {
     "dir": "android_kernel_xiaomi_sm6150",
     "image": "Image.gz",

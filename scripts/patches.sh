@@ -79,6 +79,49 @@ SMB5LIB_COMMON=(
     "https://github.com/awaken-sweet/android_kernel_xiaomi_sm6150/commit/a52850092fc5a2356ee5cadf4bd5d2b166c1c310.patch"
 )
 
+# Shared configs
+enable_erofs() {
+    echo "-- Enabling EROFS support..."
+    echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
+}
+default_config_fouronefour() {
+    echo "-- Tuning default configs..."
+    echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+}
+default_config_fouronenine() {
+    echo "-- Tuning default configs..."
+    echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_SHADOW_CALL_STACK=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
+    echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+}
+disable_modversions() {
+    echo "-- Disabling modversions..."
+    sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
+}
+
 # Patcher - 1.5
 echo "- Patching kernel source for $DEVICE_IMPORT..."
 case "$DEVICE_IMPORT" in
@@ -88,52 +131,18 @@ case "$DEVICE_IMPORT" in
         apply_patches "$LTO_PATCH"
         echo "-- Applying DTB patches..."
         apply_patches "${DTBO_PATCHES[@]}"
-        echo "-- Disabling modversions..."
-        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
-        echo "-- Enabling EROFS support..."
-        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
-        echo "-- Tuning default configs..."
-        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+        disable_modversions
+        enable_erofs
+        default_config_fouronefour
     ;;
     ginkgo-lineage|laurel_sprout-lineage)
         echo "-- Applying DTC patches..."
         apply_patches "${DTC_PATCHES[@]}"
         echo "-- Applying DTB patches..."
         apply_patches "${DTBO_PATCHES[@]}"
-        echo "-- Disabling modversions..."
-        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
-        echo "-- Enabling EROFS support..."
-        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
-        echo "-- Tuning default configs..."
-        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+        disable_modversions
+        enable_erofs
+        default_config_fouronefour
     ;;
     gta4l-lineage)
         echo "-- Fixing scripts/dtc/livetree.c..."
@@ -145,18 +154,8 @@ case "$DEVICE_IMPORT" in
         find techpack/audio -name "Makefile*" -exec sed -i 's/obj-m/obj-y/g' {} +
         find techpack/audio -name "Kbuild*" -exec sed -i 's/obj-m/obj-y/g' {} +
         echo "CONFIG_SENSORS_SSC=y" >> $MAIN_DEFCONFIG
-        echo "-- Tuning default configs..."
-        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+        enable_erofs
+        default_config_fouronenine
     ;;
     # CrDroid
     sweet-crdroid|davinci-crdroid|tucana-crdroid)
@@ -173,27 +172,9 @@ case "$DEVICE_IMPORT" in
             sed -i 's/struct i2c_client \*getClient()/struct i2c_client \*getClient(void)/g' drivers/input/touchscreen/fts_521/fts_lib/ftsIO.c
             echo "ccflags-y += -Wno-strict-prototypes" >> drivers/input/touchscreen/fts_521/Makefile
         fi
-        echo "-- Disabling modversions..."
-        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
-        echo "-- Enabling EROFS support..."
-        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
-        echo "-- Tuning default configs..."
-        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_FRAME_WARN=4096" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+        disable_modversions
+        enable_erofs
+        default_config_fouronefour
     ;;
     surya-crdroid)
         echo "-- Reverting SUSFS commits..."
@@ -216,52 +197,16 @@ case "$DEVICE_IMPORT" in
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/340e3b3a4662d51dd743b087d440a2538534d576.patch"
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/80652cb8b40fd63da65ea046f39ecb86de5dc648.patch"
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/3c8c1cd917d6b986bdbe88d66571b91a804d8add.patch"
-        echo "-- Disabling modversions..."
-        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
-        echo "-- Enabling EROFS support..."
-        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG1
-        echo "-- Tuning default configs..."
-        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+        disable_modversions
+        enable_erofs
+        default_config_fouronefour
     ;;
     sweet-crdroid-droidspaces|davinci-crdroid-droidspaces)
         echo "-- Reverting hard to commits before KSU is being added..."
         git reset --hard 78088ffb401b570b8de9408662c8fc931e9cf1a5 &> /dev/null
-        echo "-- Disabling modversions..."
-        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
-        echo "-- Enabling EROFS support..."
-        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
-        echo "-- Tuning default configs..."
-        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_FRAME_WARN=4096" >> $MAIN_DEFCONFIG
-        echo "CONFIG_CHECKPOINT_RESTORE=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+        disable_modversions
+        enable_erofs
+        default_config_fouronefour
     ;;
     # PixelOS
     sweet-pixelos|davinci-pixelos|toco-pixelos)
@@ -272,37 +217,13 @@ case "$DEVICE_IMPORT" in
             apply_patches "${LN8K_COMMON[@]}"
             echo "CONFIG_CHARGER_LN8000=y" >> $MAIN_DEFCONFIG
         fi
-        echo "-- Disabling modversions..."
-        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
-        echo "-- Tuning default configs..."
-        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+        disable_modversions
+        default_config_fouronefour
     ;;
     # Awaken
     sweet-awaken|davinci-awaken)
-        echo "-- Disabling modversions..."
-        sed -i 's/^CONFIG_MODVERSIONS=y/# CONFIG_MODVERSIONS is not set/' $MAIN_DEFCONFIG
-        echo "-- Tuning default configs..."
-        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+        disable_modversions
+        default_config_fouronefour
     ;;
     # Mi-Thorium
     mi89x7-playground)
@@ -338,81 +259,24 @@ case "$DEVICE_IMPORT" in
             }\
             ts_data->key_state = 0;\
         }' techpack/xiaomi-msm8937/touchscreen/focaltech_touch/focaltech_point_report_check.c
-        echo "-- Tuning default configs..."
-        echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_SHADOW_CALL_STACK=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_KALLSYMS_ALL=y" >> $MAIN_DEFCONFIG
+        enable_erofs
+        default_config_fouronenine
     ;;
     # Spiteful MIUI Buildout
     spiteful-sweet-miui-buildout)
         echo "-- Reverting hard to commits before KSU is being added..."
         git reset --hard 1c950660849776c0105ae268270acb590d1df308 &> /dev/null
-        # echo "-- Completely disabling LTO..."
-        # sed -i \
-        #     -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
-        #     -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
-        #     -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
-        #     -e 's/^CONFIG_CC_STACKPROTECTOR_STRONG=y/# CONFIG_CC_STACKPROTECTOR_STRONG is not set/' \
-        #     -e 's/^# CONFIG_CC_STACKPROTECTOR_NONE is not set/CONFIG_CC_STACKPROTECTOR_NONE=y/' \
-        #     -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
-        #     $MAIN_DEFCONFIG
-        # echo "-- Removing regalloc advisor..."
-        # sed -i '/-regalloc-enable-advisor=release/d' Makefile
-        echo "-- Enabling EROFS support..."
-        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
-        echo "-- Tuning default configs..."
-        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+        disable_modversions
+        enable_erofs
+        default_config_fouronefour
     ;;
     # Spiteful AOSP Buildout
     spiteful-sweet-aosp-buildout)
         echo "-- Reverting hard to commits before KSU is being added..."
         git reset --hard 1b133f3054948bee6c59332c83699ff2b95d7978 &> /dev/null
-        # echo "-- Completely disabling LTO..."
-        # sed -i \
-        #     -e 's/^CONFIG_LTO=y/# CONFIG_LTO is not set/' \
-        #     -e 's/^CONFIG_THINLTO=y/# CONFIG_THINLTO is not set/' \
-        #     -e 's/^CONFIG_CC_STACKPROTECTOR_STRONG=y/# CONFIG_CC_STACKPROTECTOR_STRONG is not set/' \
-        #     -e 's/^# CONFIG_CC_STACKPROTECTOR_NONE is not set/CONFIG_CC_STACKPROTECTOR_NONE=y/' \
-        #     -e 's/^CONFIG_LTO_CLANG=y/# CONFIG_LTO_CLANG is not set/' \
-        #     -e 's/^# CONFIG_LTO_NONE is not set/CONFIG_LTO_NONE=y/' \
-        #     $MAIN_DEFCONFIG
-        # echo "-- Removing regalloc advisor..."
-        # sed -i '/-regalloc-enable-advisor=release/d' Makefile
-        echo "-- Enabling EROFS support..."
-        echo "CONFIG_EROFS_FS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_XATTR=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_POSIX_ACL=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_SECURITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_EROFS_FS_ZIP=y" >> $MAIN_DEFCONFIG
-        echo "-- Tuning default configs..."
-        echo "CONFIG_LTO_CLANG=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_THINLTO=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_MODULE_REL_CRCS=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_SECURITY_SELINUX_DEVELOP=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_CRYPT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_DEFAULT_KEY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_SNAPSHOT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_UEVENT=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_VERITY_FEC=y" >> $MAIN_DEFCONFIG
-        echo "CONFIG_DM_BOW=y" >> $MAIN_DEFCONFIG
+        disable_modversions
+        enable_erofs
+        default_config_fouronefour
     ;;
     # Titan Kernel
     a9y18qlte-titan-aosp)

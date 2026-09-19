@@ -38,7 +38,7 @@ Standard features:
 - ReKernel tombstones support  
 
 Select features:   
-- Droidspaces container support
+- NetHunter w/ Droidspaces container support
 - Compiled with either Neutron Clang, AOSP Clang + Eva GCC, Playground TC, or AOSP Clang + Android GCC 4.9
 
 Current status:
@@ -50,7 +50,7 @@ Current status:
 - ```titan```: KSU & SUSFS + Android GCC 4.9   
 
 Derivatives:
-- ```droidspaces```: `crdroid-neon` features + Droidspaces
+- ```nethunter```: `lineage-neon` features + NetHunter w/ Droidspaces
 
 # Compatibility
 Currently supported Operating System (Weekly release only)   

@@ -210,6 +210,8 @@ nethunter_fouronefour_patches() {
     # apply_patches "$QCACLD_INJECT"
     echo "-- Patching rtl88xxau..."
     apply_patches "$RTL88XXAU_DRIVER"
+    sed -i 's/__attribute__ ((fallthrough));/fallthrough;/g' drivers/net/wireless/realtek/rtl8812au/core/rtw_mlme_ext.c
+    sed -i 's/sec->owe_ie && sec->owe_ie_len > 0/sec->owe_ie_len > 0/g' drivers/net/wireless/realtek/rtl8812au/core/rtw_mlme_ext.c
     echo "CONFIG_88XXAU=y" >> $MAIN_DEFCONFIG
     echo "-- Patching rtw88..."
     apply_patches "$RTW88_DRIVER"

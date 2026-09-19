@@ -296,6 +296,22 @@ case "$DEVICE_IMPORT" in
         enable_erofs
         default_config_fouronenine
     ;;
+    sweet-lineage-nethuner|ginkgo-lineage-nethunter)
+        if [[ $DEVICE_IMPORT == "sweet-lineage-nethunter" ]]; then
+            echo "-- Applying LTO patch..."
+            apply_patches "$LTO_PATCH"
+        fi
+        if [[ $DEVICE_IMPORT == "ginkgo-lineage-nethunter" ]]; then
+            echo "-- Applying DTC patches..."
+            apply_patches "${DTC_PATCHES[@]}"
+        fi
+        echo "-- Applying DTB patches..."
+        apply_patches "${DTBO_PATCHES[@]}"
+        nethunter_fouronefour_configs
+        nethunter_fouronefour_patches
+        enable_erofs
+        default_config_fouronefour
+    ;;
     # CrDroid
     sweet-crdroid|davinci-crdroid|tucana-crdroid)
         echo "-- Reverting hard to commits before KSU is being added..."
@@ -336,13 +352,6 @@ case "$DEVICE_IMPORT" in
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/340e3b3a4662d51dd743b087d440a2538534d576.patch"
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/80652cb8b40fd63da65ea046f39ecb86de5dc648.patch"
         revert_commit "https://github.com/crdroidandroid/android_kernel_xiaomi_surya/commit/3c8c1cd917d6b986bdbe88d66571b91a804d8add.patch"
-        disable_modversions
-        enable_erofs
-        default_config_fouronefour
-    ;;
-    sweet-crdroid-droidspaces|davinci-crdroid-droidspaces)
-        echo "-- Reverting hard to commits before KSU is being added..."
-        git reset --hard 78088ffb401b570b8de9408662c8fc931e9cf1a5 &> /dev/null
         disable_modversions
         enable_erofs
         default_config_fouronefour

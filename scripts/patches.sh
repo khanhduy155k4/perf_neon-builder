@@ -202,12 +202,12 @@ nethunter_fouronefour_configs() {
     echo "CONFIG_CAN_ISOTP=y" >> $MAIN_DEFCONFIG
 }
 nethunter_fouronefour_patches() {
-    QCACLD_INJECT="https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel-builder/-/raw/main/patches/4.14/add-qcacld-3.0-injection-4.14.patch"
+    # QCACLD_INJECT="https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel-builder/-/raw/main/patches/4.14/add-qcacld-3.0-injection-4.14.patch"
     RTL88XXAU_DRIVER="https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel-builder/-/raw/main/patches/4.14/add-rtl88xxau-5.6.4.2-drivers.patch"
     RTW88_DRIVER="https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel-builder/-/raw/main/patches/4.14/add-rtw88-drivers-4.14.patch"
     UB500_PATCH="https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel-builder/-/raw/main/patches/4.04/add-ub500-to-btusb.patch"
-    echo "-- Patching qcacld-3.0..."
-    apply_patches "$QCACLD_INJECT"
+    # echo "-- Patching qcacld-3.0..."
+    # apply_patches "$QCACLD_INJECT"
     echo "-- Patching rtl88xxau..."
     apply_patches "$RTL88XXAU_DRIVER"
     echo "CONFIG_88XXAU=y" >> $MAIN_DEFCONFIG
@@ -296,7 +296,7 @@ case "$DEVICE_IMPORT" in
         enable_erofs
         default_config_fouronenine
     ;;
-    sweet-lineage-nethuner|ginkgo-lineage-nethunter)
+    sweet-lineage-nethunter|ginkgo-lineage-nethunter)
         if [[ $DEVICE_IMPORT == "sweet-lineage-nethunter" ]]; then
             echo "-- Applying LTO patch..."
             apply_patches "$LTO_PATCH"

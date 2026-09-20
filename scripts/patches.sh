@@ -383,6 +383,10 @@ case "$DEVICE_IMPORT" in
         enable_erofs
         default_config_fouronenine
     ;;
+    sdm660-southwest-ng)
+        enable_erofs
+        default_config_fouronenine
+    ;;
     # Spiteful MIUI Buildout
     spiteful-sweet-miui-buildout)
         echo "-- Reverting hard to commits before KSU is being added..."

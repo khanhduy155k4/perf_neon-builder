@@ -1,4 +1,34 @@
 {
+  "sdm660-southwest-ng": {
+    "dir": "android_kernel_xiaomi_sdm660",
+    "image": "Image.gz-dtb",
+    "dtb": "",
+    "dtbo": "",
+    "supported_versions": "11-17",
+    "device_names": ["sdm660", "clover", "jason", "lavender", "platina", "tulip", "wayne", "whyred"],
+    "banner": "SouthWest-NG For SDM660 Devices (sdm660)",
+    "zip_prefix": "southwest-ng-sdm660-playground",
+    "env": {
+      "main_defconfig": "arch/arm64/configs/vendor/xiaomi/sdm660_defconfig",
+      "actual_main_defconfig": "vendor/xiaomi/sdm660_defconfig",
+      "common_defconfig": "vendor/debugfs.config",
+      "device_defconfig": "vendor/xiaomi/clover.config vendor/xiaomi/jason.config vendor/xiaomi/lavender.config vendor/xiaomi/platina.config vendor/xiaomi/tulip.config vendor/xiaomi/wayne.config vendor/xiaomi/whyred.config",
+      "feature_defconfig": "",
+      "kernel_name": "-southwest-ng-mainbranch-neon",
+      "kernel_version": "4.19",
+      "clang_strat": "1"
+    },
+    "build_flags": {
+      "ksu_type": ["zako-susfs", "none"], 
+      "bbg_type": "bbg",
+      "nomount_type": "nomount",
+      "droidspaces_type": "none",
+      "rekernel_type": "rekernel"
+    },
+    "sources": [
+      { "repo": "https://github.com/pix106/android_kernel_xiaomi_sdm660_southwest-ng", "branch": "main", "path": "." }
+    ]
+  },
   "sweet-lineage-nethunter": {
     "dir": "android_kernel_xiaomi_sm6150",
     "image": "Image.gz",

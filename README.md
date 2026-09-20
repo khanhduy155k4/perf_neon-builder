@@ -137,5 +137,5 @@ Projects
 - [LineageOS](https://github.com/LineageOS) for kernel sources.   
 - [PixelOS-Devices](https://github.com/PixelOS-Devices) for kernel sources.   
 - [Mi-Thorium](https://github.com/Mi-Thorium) for kernel sources.   
-- [romiyusnandar](https://github.com/romiyusnandar) for kernel sources.
-- [imren0x](https://github.com/imren0x) for kernel sources.
+- [crdroidandroid](https://github.com/crdroidandroid) for kernel sources.   
+- [schr-0dinger](https://github.com/schr-0dinger) for kernel sources.   

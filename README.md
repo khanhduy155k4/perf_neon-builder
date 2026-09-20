@@ -123,7 +123,8 @@ You can install different KernelSU Manager with ReSukiSU kernel drivers. This is
 # Credits
 Patches & buildscript
 - [TBYOOL](https://github.com/tbyool) for the buildscripts, kernel sources & kernel patches.   
-- [xiaomi-sm6150](https://github.com/xiaomi-sm6150) for the DTB & LN8K patches.   
+- [xiaomi-sm6150](https://github.com/xiaomi-sm6150) for the DTB patches.   
+- [awaken-sweet](https://github.com/awaken-sweet) for LN8K patches.
 - [JackA1ltMan](https://github.com/JackA1ltman) for ReSukiSU hook scripts, ReKernel scripts & SUSFS patches.   
 - [TheSillyOk](https://github.com/TheSillyOk) for LTO & kpatch fixup for 4.14 devices.   
 

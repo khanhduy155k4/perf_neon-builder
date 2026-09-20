@@ -371,11 +371,6 @@ case "$DEVICE_IMPORT" in
         disable_modversions
         default_config_fouronefour
     ;;
-    # Awaken
-    sweet-awaken|davinci-awaken)
-        disable_modversions
-        default_config_fouronefour
-    ;;
     # Mi-Thorium
     mi89x7-playground)
         echo "-- Reverting KSU commit..."

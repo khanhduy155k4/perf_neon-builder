@@ -368,13 +368,6 @@ case "$DEVICE_IMPORT" in
     ;;
     # PixelOS
     sweet-pixelos|davinci-pixelos|toco-pixelos)
-        if [[ $DEVICE_IMPORT == "sweet-pixelos" ]]; then
-            echo "-- Applying SMB5LIB patches..."
-            apply_patches "${SMB5LIB_COMMON[@]}"
-            echo "-- Applying LN8K patches..."
-            apply_patches "${LN8K_COMMON[@]}"
-            echo "CONFIG_CHARGER_LN8000=y" >> $MAIN_DEFCONFIG
-        fi
         disable_modversions
         default_config_fouronefour
     ;;

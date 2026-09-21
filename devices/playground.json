@@ -177,7 +177,7 @@
       "clang_strat": "2"
     },
     "build_flags": {
-      "ksu_type": ["zako-susfs", "none"], 
+      "ksu_type": ["zako-susfs"],
       "bbg_type": "bbg",
       "nomount_type": "nomount",
       "droidspaces_type": "none",

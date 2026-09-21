@@ -227,12 +227,16 @@ ksu_fix_susfs_fouronefour() {
         /#endif/ { in_sus_map = 0 }
         { print }
         ' fs/proc/task_mmu.c > fs/proc/task_mmu.c.tmp && mv fs/proc/task_mmu.c.tmp fs/proc/task_mmu.c
+        echo "-- KernelSU: Checking for undeclared identifier on fs/stat.c..."
+        grep -q "fname = getname_flags" fs/stat.c && ! grep -q "struct filename \*fname;" fs/stat.c && sed -i '/struct path path;/a \	struct filename *fname;' fs/stat.c
     fi
 }
 ksu_fix_susfs_fouronenine() {
     if [[ "$KERNEL_VERSION" == "4.19" ]]; then
         echo "-- KernelSU: Patching fs/namespace.c for susfs_sus_mount..."
         sed -i 's|^[[:space:]]*mnt = alloc_vfsmnt(fc->source ?: "none");|#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT\n\t// - We will just stop checking for ksu process if /sdcard/Android is accessible,\n\t//   for the sake of performance\n\tif (static_branch_unlikely(\&susfs_is_sdcard_android_data_not_decrypted)) {\n\t\tif (susfs_is_current_ksu_domain()) {\n\t\t\tmnt = susfs_alloc_non_unshare_ksu_vfsmnt(fc->source ?:"none");\n\t\t\tgoto bypass_orig_flow;\n\t\t}\n\t}\n#endif\n\tmnt = alloc_vfsmnt(fc->source ?: "none");\n#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT\nbypass_orig_flow:\n#endif|' fs/namespace.c
+        echo "-- KernelSU: Checking for undeclared identifier on fs/stat.c..."
+        grep -q "fname = getname_flags" fs/stat.c && ! grep -q "struct filename \*fname;" fs/stat.c && sed -i '/struct path path;/a \	struct filename *fname;' fs/stat.c
     fi
 }
 ksu_fix_susfs_fourpointfour() {

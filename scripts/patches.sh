@@ -393,10 +393,18 @@ case "$DEVICE_IMPORT" in
     ;;
     # SouthWest-NG
     sdm660-southwest-ng)
+        echo "-- Fixing broken fingerprint..."
+        sed -i 's/rst_gpio_exit/exit_1/g' drivers/input/fingerprint/fpc/fpc1020_platform_tee.c
+        echo "-- Fixing audio on clover..."
+        sed -i '1i #include <linux/i2c.h>\n#include <linux/module.h>' techpack/audio/asoc/codecs/tas2557_clover/tas2557-regmap.c
         enable_erofs
         default_config_fouronenine
     ;;
     sdm660-southwest-ng-nethunter)
+        echo "-- Fixing broken fingerprint..."
+        sed -i 's/rst_gpio_exit/exit_1/g' drivers/input/fingerprint/fpc/fpc1020_platform_tee.c
+        echo "-- Fixing audio on clover..."
+        sed -i '1i #include <linux/i2c.h>\n#include <linux/module.h>' techpack/audio/asoc/codecs/tas2557_clover/tas2557-regmap.c
         nethunter_fouronefour_configs
         nethunter_fouronenine_patches
         enable_erofs

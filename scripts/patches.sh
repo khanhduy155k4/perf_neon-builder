@@ -227,7 +227,15 @@ nethunter_fouronefour_patches() {
     sed -i -E 's/\.start[[:space:]]*=[[:space:]]*ath9k_htc_start,/.start = ath9k_mac80211_start,/g' drivers/net/wireless/ath/ath9k/htc_drv_main.c
     sed -i -E 's/\.stop[[:space:]]*=[[:space:]]*ath9k_htc_stop,/.stop = ath9k_mac80211_stop,/g' drivers/net/wireless/ath/ath9k/htc_drv_main.c
 }
-
+nethunter_fouronenine_patches() {
+    RTW88_DRIVER="https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel-builder/-/raw/main/patches/4.19/add-rtw88-drivers-4.19.patch"
+    UB500_PATCH="https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-kernel-builder/-/raw/main/patches/4.04/add-ub500-to-btusb.patch"
+    echo "-- Patching rtw88..."
+    apply_patches "$RTW88_DRIVER"
+    echo "CONFIG_RTW88=y" >> $MAIN_DEFCONFIG
+    echo "-- Patching ub500..."
+    apply_patches "$UB500_PATCH"
+}
 # Shared configs
 enable_erofs() {
     echo "-- Enabling EROFS support..."
@@ -383,7 +391,14 @@ case "$DEVICE_IMPORT" in
         enable_erofs
         default_config_fouronenine
     ;;
+    # SouthWest-NG
     sdm660-southwest-ng)
+        enable_erofs
+        default_config_fouronenine
+    ;;
+    sdm660-southwest-ng-nethunter)
+        nethunter_fouronefour_configs
+        nethunter_fouronenine_patches
         enable_erofs
         default_config_fouronenine
     ;;

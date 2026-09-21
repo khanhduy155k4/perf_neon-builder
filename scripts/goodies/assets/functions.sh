@@ -229,7 +229,7 @@ ksu_fix_susfs_fouronefour() {
         ' fs/proc/task_mmu.c > fs/proc/task_mmu.c.tmp && mv fs/proc/task_mmu.c.tmp fs/proc/task_mmu.c
         echo "-- KernelSU: Checking for undeclared identifier on fs/stat.c..."
         sed -i '/struct filename \*fname;/d' fs/stat.c
-        sed -i '/int error = -EINVAL;/a \	struct filename *fname;' fs/stat.c
+        sed -i '/fname = getname_flags/i \	struct filename *fname;' fs/stat.c
     fi
 }
 ksu_fix_susfs_fouronenine() {

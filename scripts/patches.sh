@@ -392,7 +392,7 @@ case "$DEVICE_IMPORT" in
         default_config_fouronenine
     ;;
     # SouthWest-NG
-    sdm660-southwest-ng)
+    lavender-southwest-ng)
         echo "-- Fixing broken fingerprint..."
         sed -i 's/rst_gpio_exit/exit_1/g' drivers/input/fingerprint/fpc/fpc1020_platform_tee.c
         echo "-- Fixing audio on clover..."
@@ -400,7 +400,7 @@ case "$DEVICE_IMPORT" in
         enable_erofs
         default_config_fouronenine
     ;;
-    sdm660-southwest-ng-nethunter)
+    lavender-southwest-ng-nethunter)
         echo "-- Fixing broken fingerprint..."
         sed -i 's/rst_gpio_exit/exit_1/g' drivers/input/fingerprint/fpc/fpc1020_platform_tee.c
         echo "-- Fixing audio on clover..."

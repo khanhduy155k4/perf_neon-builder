@@ -36,6 +36,10 @@ echo "CONFIG_PSTORE_CONSOLE=y" >> out/.config
 echo "CONFIG_PSTORE_PMSG=y" >> out/.config
 echo "CONFIG_PSTORE_RAM=y" >> out/.config
 
+# Patch Goodix touch driver to prevent forcing firmware downgrade on newer ICs
+echo "-- Patching Goodix touchscreen driver to prevent firmware downgrade..."
+find drivers/input/touchscreen/ -type f -name "*update*.c" -exec sed -i 's/else if (ret > 0) {/else if (ret > 0) { ts_info("FW on IC is newer, skip update"); return 0; } else if (0) {/g' {} +
+
 # Config generation
 echo "-- Executing olddefconfig and syncconfig..."
 { yes "" 2>/dev/null || true; } | "${MAKE_CMD[@]}" olddefconfig &> /dev/null

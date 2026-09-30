@@ -28,8 +28,8 @@
  		}
  
 +		/* Reject extreme ghost touches (charger noise) from aftermarket panels */
-+		if (touch_data->coords[i].x > 8000 ||
-+		    touch_data->coords[i].y > 8000) {
++		if (touch_data->coords[i].x > 15000 ||
++		    touch_data->coords[i].y > 15000) {
 +			if (__test_and_clear_bit(i, &core_data->touch_id)) {
 +				input_mt_slot(dev, i);
 +				input_mt_report_slot_state(dev, MT_TOOL_FINGER, false);
@@ -38,9 +38,9 @@
 +			continue;
 +		}
 +
-+		/* Scale aftermarket GT9896 2.5x matrix (2700x6000) to standard panel resolution (1080x2400) */
-+		touch_data->coords[i].x = (touch_data->coords[i].x * 2) / 5;
-+		touch_data->coords[i].y = (touch_data->coords[i].y * 2) / 5;
++		/* Scale aftermarket GT9896 5x matrix (5400x12000) to standard panel resolution (1080x2400) */
++		touch_data->coords[i].x = touch_data->coords[i].x / 5;
++		touch_data->coords[i].y = touch_data->coords[i].y / 5;
 +		if (touch_data->coords[i].x > ts_dev->board_data.panel_max_x)
 +			touch_data->coords[i].x = ts_dev->board_data.panel_max_x;
 +		if (touch_data->coords[i].y > ts_dev->board_data.panel_max_y)

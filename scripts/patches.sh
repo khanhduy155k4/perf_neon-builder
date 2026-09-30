@@ -425,8 +425,8 @@ case "$DEVICE_IMPORT" in
     spiteful-sweet-miui-buildout)
         echo "-- Reverting hard to commits before KSU is being added..."
         git reset --hard 1c950660849776c0105ae268270acb590d1df308 &> /dev/null
-        echo "-- Patching Goodix touchscreen driver to prevent firmware downgrade..."
-        find drivers/input/touchscreen/ -type f -name "*update*.c" -exec sed -i 's/else if (ret > 0) {/else if (ret > 0) { ts_info("FW on IC is newer, skip update"); return 0; } else if (0) {/g' {} +
+        echo "-- Applying Goodix aftermarket screen & charger noise fix..."
+        patch -p1 < scripts/fix_goodix_aftermarket.patch || { echo "Fatal: Failed to apply goodix aftermarket patch!"; exit 1; }
         disable_modversions
         enable_erofs
         default_config_fouronefour

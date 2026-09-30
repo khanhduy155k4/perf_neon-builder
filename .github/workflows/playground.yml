@@ -2,6 +2,13 @@ name: Playground
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - 'devices/playground.json'
+      - 'scripts/**'
+      - '.github/workflows/playground.yml'
   schedule:
     - cron: '5 2 * * 0'
 

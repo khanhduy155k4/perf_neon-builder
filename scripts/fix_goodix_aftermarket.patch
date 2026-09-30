@@ -8,7 +8,36 @@
  		}
 --- a/drivers/input/touchscreen/gt9896/goodix_ts_core.c
 +++ b/drivers/input/touchscreen/gt9896/goodix_ts_core.c
-@@ -2132,33 +2132,28 @@
+@@ -579,8 +579,8 @@
+ 	mutex_init(&config->lock);
+ 	config->initialized = TS_CFG_STABLE;
+ 
+-	if (ts_dev->hw_ops->send_config)
+-		ts_dev->hw_ops->send_config(ts_dev, config);
++	/* Skip sending cfg bin from later init thread for aftermarket display */
++	ts_info("skip later_init send_config for aftermarket display compatibility");
+ 
+ exit:
+ 	enable_irq(core_data->irq);
+@@ -1152,6 +1152,17 @@
+ 			continue;
+ 		}
+ 
++		/* Reject out-of-bounds ghost touches from aftermarket panels */
++		if (touch_data->coords[i].x > ts_dev->board_data.panel_max_x ||
++		    touch_data->coords[i].y > ts_dev->board_data.panel_max_y) {
++			if (__test_and_clear_bit(i, &core_data->touch_id)) {
++				input_mt_slot(dev, i);
++				input_mt_report_slot_state(dev, MT_TOOL_FINGER, false);
++				pre_coords[i].status = 0;
++			}
++			continue;
++		}
++
+ 		input_mt_slot(dev, i);
+ 		input_mt_report_slot_state(dev, MT_TOOL_FINGER, true);
+ 		input_report_abs(dev, ABS_MT_POSITION_X,
+@@ -2132,33 +2143,28 @@
  	static u8 is_usb_exit = 0;
  
  	if (!core_data->battery_psy) {
@@ -53,7 +82,21 @@
  	}
  }
  
-@@ -3215,20 +3210,14 @@
+@@ -2301,11 +2307,8 @@
+ 	int r;
+ 	struct goodix_ts_device *ts_dev = ts_device(core_data);
+ 
+-	/* send normal-cfg to firmware */
+-	r = ts_dev->hw_ops->send_config(ts_dev, &(ts_dev->normal_cfg));
+-	if (r < 0) {
+-		ts_info("failed send normal config[ignore]");
+-	}
++	/* Skip send normal config for aftermarket display compatibility */
++	ts_info("skip send normal config for aftermarket display compatibility");
+ 
+ 	r = ts_dev->hw_ops->read_version(ts_dev, &ts_dev->chip_version);
+ 	if (r < 0)
+@@ -3215,20 +3218,14 @@
  	 * only for MTK platform
  	 * pm_qos_add_request(&core_data->tp_qos_request, PM_QOS_CPU_DMA_LATENCY, PM_QOS_DEFAULT_VALUE);
  	*/

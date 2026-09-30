@@ -3,7 +3,7 @@
     "dir": "android_kernel_xiaomi_sm6150",
     "image": "Image.gz",
     "dtb": "",
-    "dtbo": "dtbo.img",
+    "dtbo": "",
     "supported_versions": "11-15",
     "device_names": ["sweet", "sweetin"],
     "banner": "sweet (sm6150)",

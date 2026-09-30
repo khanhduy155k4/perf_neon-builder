@@ -427,6 +427,12 @@ case "$DEVICE_IMPORT" in
         git reset --hard 1c950660849776c0105ae268270acb590d1df308 &> /dev/null
         echo "-- Applying Goodix aftermarket screen & charger noise fix..."
         patch -p1 < scripts/fix_goodix_aftermarket.patch || { echo "Fatal: Failed to apply goodix aftermarket patch!"; exit 1; }
+        echo "-- Adding StriXotic touchscreen & display configs..."
+        echo "CONFIG_TOUCHSCREEN_TDDI_DBCLK=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_DYNAMIC_DEBUG=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_DSI_PARSER=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_LAST_TOUCH_EVENTS=y" >> $MAIN_DEFCONFIG
+        echo "CONFIG_TOUCH_COUNT_DUMP=y" >> $MAIN_DEFCONFIG
         disable_modversions
         enable_erofs
         default_config_fouronefour

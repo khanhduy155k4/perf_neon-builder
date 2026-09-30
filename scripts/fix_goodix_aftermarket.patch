@@ -1,11 +1,15 @@
 --- a/drivers/input/touchscreen/gt9896/goodix_gtx8_update.c
 +++ b/drivers/input/touchscreen/gt9896/goodix_gtx8_update.c
-@@ -315,3 +315,4 @@
+@@ -314,7 +314,8 @@
+ 			ts_info("FW version is equal to the IC's");
+ 			return 0;
  		} else if (ret > 0) {
 -			ts_info("Warning: fw version is lower the IC's");
 +			ts_info("Warning: fw version is lower the IC's, skip downgrade");
 +			return 0;
  		}
+ 	} /* else invalid firmware, update firmware */
+ 
 --- a/drivers/input/touchscreen/gt9896/goodix_ts_core.c
 +++ b/drivers/input/touchscreen/gt9896/goodix_ts_core.c
 @@ -579,8 +579,8 @@
@@ -19,13 +23,17 @@
  
  exit:
  	enable_irq(core_data->irq);
-@@ -1152,6 +1152,17 @@
+@@ -1152,6 +1152,21 @@
  			continue;
  		}
  
-+		/* Reject out-of-bounds ghost touches from aftermarket panels */
-+		if (touch_data->coords[i].x > ts_dev->board_data.panel_max_x ||
-+		    touch_data->coords[i].y > ts_dev->board_data.panel_max_y) {
++		/* Reject extreme ghost touches (charger noise) from aftermarket panels.
++		 * Real touches from aftermarket GT9896 IC have X/Y up to ~3800.
++		 * Charger-induced ghost touches have Y values > 10000 (13000-16000).
++		 * Do NOT use panel_max_x/y (1079/2399) as threshold - those are display
++		 * resolution, NOT the IC native coordinate range (~3800). */
++		if (touch_data->coords[i].x > 8000 ||
++		    touch_data->coords[i].y > 8000) {
 +			if (__test_and_clear_bit(i, &core_data->touch_id)) {
 +				input_mt_slot(dev, i);
 +				input_mt_report_slot_state(dev, MT_TOOL_FINGER, false);
@@ -37,7 +45,24 @@
  		input_mt_slot(dev, i);
  		input_mt_report_slot_state(dev, MT_TOOL_FINGER, true);
  		input_report_abs(dev, ABS_MT_POSITION_X,
-@@ -2132,33 +2143,28 @@
+@@ -1578,10 +1593,14 @@
+ 	if (ts_bdata->swap_axis)
+ 		swap(ts_bdata->panel_max_x, ts_bdata->panel_max_y);
+ 
++	/* Aftermarket OLED panels use a different sensor matrix than the original.
++	 * GT9896 Yellowstone IC reports in native matrix space (~3800), not DTS
++	 * panel-max-x/y (1079/2399). send_config does NOT change coordinate scale.
++	 * Declare actual native IC range so Android TouchInputMapper scales correctly. */
+ 	input_set_abs_params(input_dev, ABS_MT_POSITION_X,
+-				0, ts_bdata->panel_max_x, 0, 0);
++				0, 3800, 0, 0);
+ 	input_set_abs_params(input_dev, ABS_MT_POSITION_Y,
+-				0, ts_bdata->panel_max_y, 0, 0);
++				0, 3800, 0, 0);
+ 	input_set_abs_params(input_dev, ABS_MT_TOUCH_MAJOR,
+ 				0, ts_bdata->panel_max_w, 0, 0);
+ 	input_set_abs_params(input_dev, ABS_MT_WIDTH_MAJOR,
+@@ -2132,33 +2151,28 @@
  	static u8 is_usb_exit = 0;
  
  	if (!core_data->battery_psy) {
@@ -82,7 +107,7 @@
  	}
  }
  
-@@ -2301,11 +2307,8 @@
+@@ -2301,11 +2315,8 @@
  	int r;
  	struct goodix_ts_device *ts_dev = ts_device(core_data);
  
@@ -96,7 +121,7 @@
  
  	r = ts_dev->hw_ops->read_version(ts_dev, &ts_dev->chip_version);
  	if (r < 0)
-@@ -3215,20 +3218,14 @@
+@@ -3215,20 +3226,14 @@
  	 * only for MTK platform
  	 * pm_qos_add_request(&core_data->tp_qos_request, PM_QOS_CPU_DMA_LATENCY, PM_QOS_DEFAULT_VALUE);
  	*/

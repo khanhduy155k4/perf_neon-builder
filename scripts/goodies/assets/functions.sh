@@ -318,6 +318,9 @@ ksu_export_selinux_symbols() {
     unstatic "security/selinux/ss/services.c" "DEFINE_MUTEX(selinux_status_lock);"
     unstatic "security/selinux/ss/services.c" "DEFINE_RWLOCK(policy_rwlock);"
     unstatic "security/selinux/hooks.c" "struct security_operations selinux_ops"
+    # BakaSU v4.2+ static_export_check also requires these two in ss/services.c
+    unstatic "security/selinux/ss/services.c" "void security_dump_masked_av"
+    unstatic "security/selinux/ss/services.c" "void context_struct_compute_av"
 }
 
 # NoMount

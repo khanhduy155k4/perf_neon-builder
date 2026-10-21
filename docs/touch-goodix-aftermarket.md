@@ -55,6 +55,31 @@ The node lives in the **dtbo partition** (`/dev/block/by-name/dtbo`), not in
 the kernel zip does not ship or flash a dtbo. Patch the partition once and it
 survives kernel updates, reboots and hard resets.
 
+### Kernel-side fallback (stock dtbo also works)
+
+`scripts/fix_goodix_aftermarket.patch` widens the declared range at runtime in
+`goodix_ts_set_input_params()` when the DT still carries the native panel size:
+
+```c
+if (ts_bdata->panel_max_x && ts_bdata->panel_max_x < 4000)
+	ts_bdata->panel_max_x = ts_bdata->panel_max_x * 8 + 7;
+if (ts_bdata->panel_max_y && ts_bdata->panel_max_y < 4000)
+	ts_bdata->panel_max_y = ts_bdata->panel_max_y * 8 + 7;
+```
+
+With a stock DT (1079/2399) the evdev range becomes 8639/19199, exactly as if
+the dtbo had been patched. With an already-patched dtbo the guard skips the
+change, so both can coexist.
+
+Result: **flashing the kernel zip alone is enough**. The dtbo patch below is
+still useful for kernels built without this change, or if you want the fix
+without waiting for a new kernel build.
+
+Caveat: this assumes an aftermarket panel that reports 8x. On a stock panel
+(native coordinates) the widening would be wrong, so do not use this build on
+an original touch panel.
+
+
 ## Why earlier driver-side attempts failed
 
 | Commit | Assumption | Result |
